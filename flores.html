@@ -1,0 +1,656 @@
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Día de las Flores Amarillas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;family=Arial:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+<style>
+        @keyframes pop {
+            to { transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: scale(0.5); }
+        }
+    </style><style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #1a1a00;
+    color: #ffd700;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    padding: 15px;
+}
+
+.matrix-flowers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.flower-matrix {
+    position: absolute;
+    color: #ffd700;
+    font-size: 16px;
+    animation: fall linear infinite;
+    text-shadow: 0 0 5px #ffed4d;
+}
+
+@media (min-width: 768px) {
+    .flower-matrix {
+        font-size: 20px;
+    }
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); }
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    border: 1px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 25px;
+        border-radius: 15px;
+    }
+}
+
+.header {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(45deg, #ffd700, #ffed4d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+.date {
+    font-size: 0.9rem;
+    color: #ffed4d;
+    letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+    .date {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+}
+
+.photo-frame {
+    width: 170px;
+    height: 170px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    box-shadow: 0 0 15px #ffd700, 
+                inset 0 0 15px #ffd700;
+    padding: 5px;
+    position: relative;
+    overflow: hidden;
+    animation: glow 2s infinite alternate;
+}
+
+@media (min-width: 768px) {
+    .photo-frame {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 25px;
+    }
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px #ffd700, inset 0 0 10px #ffd700; }
+    to { box-shadow: 0 0 20px #ffd700, inset 0 0 20px #ffd700; }
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.message {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 auto 15px;
+    max-width: 95%;
+    color: #fff8c6;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@media (min-width: 768px) {
+    .message {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        max-width: 90%;
+    }
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.flower-btn {
+    background: transparent;
+    color: #ffed4d;
+    border: 2px solid #ffd700;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 15px 0;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .flower-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+        margin: 15px 0;
+    }
+}
+
+.flower-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+}
+
+.flower-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        transparent, 
+        rgba(255, 237, 77, 0.3), 
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -50%; }
+    100% { left: 150%; }
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #ffd700;
+    margin-top: 15px;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+    .signature {
+        font-size: 1.8rem;
+        margin-top: 20px;
+    }
+}
+
+.music-btn {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    background: transparent;
+    border: 1px solid #ffd700;
+    color: #ffed4d;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    .music-btn {
+        top: 10%;
+        right: 20px;
+    }
+}
+
+.music-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease forwards;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    border: 1px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    padding: 40px 20px;
+    color: #fff8c6;
+    text-align: center;
+    margin: 20px 0;
+}
+
+@media (min-width: 768px) {
+    .modal-content {
+        padding: 40px;
+        margin: 30px 0;
+    }
+}
+
+.torn-paper {
+    position: relative;
+    margin-top: 80%;
+    padding: 30px 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+}
+@media (max-width: 568px) {
+    .torn-paper {
+        margin-top: 0%;
+    }
+}
+@media (min-width: 768px) {
+    .torn-paper {
+        padding: 40px 30px;
+    }
+}
+
+.torn-paper::before,
+.torn-paper::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background-image: 
+        radial-gradient(circle at 0 0, transparent 25%, #ffd700 25%, #ffd700 75%, transparent 75%),
+        radial-gradient(circle at 10px 0, transparent 25%, #ffd700 25%, #ffd700 75%, transparent 75%);
+    background-size: 20px 15px;
+    background-repeat: repeat-x;
+    z-index: 2;
+}
+
+.torn-paper::before {
+    top: -10px;
+}
+
+.torn-paper::after {
+    bottom: -10px;
+    transform: rotate(180deg);
+}
+
+.letter-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+@media (min-width: 768px) {
+    .letter-title {
+        font-size: 2.8rem;
+        margin-bottom: 25px;
+    }
+}
+
+.letter-content {
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: left;
+    margin-bottom: 25px;
+    color: #fff8c6;
+    padding: 0 10px;
+}
+
+@media (min-width: 768px) {
+    .letter-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        padding: 0 20px;
+    }
+}
+
+.letter-content p {
+    margin-bottom: 15px;
+}
+
+.letter-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: #ffd700;
+    text-align: right;
+    margin-top: 20px;
+    padding-right: 30px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+    .letter-signature {
+        font-size: 2.4rem;
+    }
+}
+
+.close-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    color: #ffed4d;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #ffd700;
+    z-index: 1100;
+}
+
+@media (min-width: 768px) {
+    .close-btn {
+        top: 25px;
+        right: 25px;
+        width: 50px;
+        height: 50px;
+        font-size: 32px;
+    }
+}
+
+.close-btn:hover {
+    color: #ffd700;
+    transform: scale(1.1);
+}
+
+@keyframes pop {
+    to { transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: scale(0.5); }
+}
+
+@media (max-width: 767px) {
+    .modal {
+        align-items: flex-start;
+        padding-top: 60px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-content {
+        margin-bottom: 40px;
+    }
+    
+    .letter-title {
+        font-size: 1.8rem;
+    }
+    
+    .letter-content {
+        font-size: 0.95rem;
+    }
+    
+    .letter-signature {
+        font-size: 1.8rem;
+    }
+}
+</style></head>
+<body>
+    <div class="matrix-flowers" id="matrixFlowers"><div class="flower-matrix" style="left: 9.39304vw; animation-duration: 3.64757s; opacity: 0.677553; font-size: 24.1177px;">💐</div><div class="flower-matrix" style="left: 68.2001vw; animation-duration: 3.28443s; opacity: 0.404404; font-size: 24.9039px;">💐</div><div class="flower-matrix" style="left: 17.8112vw; animation-duration: 3.68143s; opacity: 0.677489; font-size: 17.4893px;">💮</div><div class="flower-matrix" style="left: 91.5046vw; animation-duration: 2.60429s; opacity: 0.471924; font-size: 17.7609px;">🌻</div><div class="flower-matrix" style="left: 25.6774vw; animation-duration: 3.80105s; opacity: 0.452243; font-size: 24.9053px;">💮</div><div class="flower-matrix" style="left: 58.7899vw; animation-duration: 4.29358s; opacity: 0.741981; font-size: 17.4264px;">💐</div><div class="flower-matrix" style="left: 62.4057vw; animation-duration: 3.99648s; opacity: 0.72733; font-size: 10.0497px;">💐</div><div class="flower-matrix" style="left: 88.4504vw; animation-duration: 4.55069s; opacity: 0.322022; font-size: 10.8375px;">🌻</div><div class="flower-matrix" style="left: 7.19211vw; animation-duration: 3.29205s; opacity: 0.483457; font-size: 10.9991px;">🌻</div><div class="flower-matrix" style="left: 15.2309vw; animation-duration: 2.89715s; opacity: 0.334499; font-size: 15.6338px;">🏵️</div><div class="flower-matrix" style="left: 49.0926vw; animation-duration: 4.6395s; opacity: 0.53033; font-size: 15.8222px;">🌻</div><div class="flower-matrix" style="left: 87.6133vw; animation-duration: 3.91958s; opacity: 0.472247; font-size: 22.8264px;">🌼</div><div class="flower-matrix" style="left: 16.9819vw; animation-duration: 3.18714s; opacity: 0.631717; font-size: 18.5921px;">🌻</div><div class="flower-matrix" style="left: 63.0047vw; animation-duration: 3.07329s; opacity: 0.785042; font-size: 24.3158px;">💮</div><div class="flower-matrix" style="left: 19.4851vw; animation-duration: 3.2713s; opacity: 0.748779; font-size: 24.6123px;">🏵️</div><div class="flower-matrix" style="left: 32.9381vw; animation-duration: 4.5235s; opacity: 0.752468; font-size: 17.5612px;">🌻</div><div class="flower-matrix" style="left: 42.5629vw; animation-duration: 4.65208s; opacity: 0.771924; font-size: 24.07px;">💮</div><div class="flower-matrix" style="left: 93.099vw; animation-duration: 3.52489s; opacity: 0.434434; font-size: 20.7025px;">🏵️</div><div class="flower-matrix" style="left: 14.4399vw; animation-duration: 2.04802s; opacity: 0.301296; font-size: 17.4859px;">🌼</div><div class="flower-matrix" style="left: 9.09553vw; animation-duration: 3.65757s; opacity: 0.308991; font-size: 16.2077px;">🌻</div><div class="flower-matrix" style="left: 41.5308vw; animation-duration: 3.56269s; opacity: 0.614381; font-size: 22.2331px;">🌼</div><div class="flower-matrix" style="left: 60.7123vw; animation-duration: 2.48752s; opacity: 0.376699; font-size: 15.978px;">🌼</div><div class="flower-matrix" style="left: 28.4646vw; animation-duration: 2.96973s; opacity: 0.731887; font-size: 24.9694px;">🌸</div><div class="flower-matrix" style="left: 61.0716vw; animation-duration: 2.77913s; opacity: 0.704334; font-size: 16.013px;">🌸</div><div class="flower-matrix" style="left: 92.95vw; animation-duration: 2.58551s; opacity: 0.535664; font-size: 11.8942px;">💮</div><div class="flower-matrix" style="left: 92.9257vw; animation-duration: 3.51497s; opacity: 0.467008; font-size: 10.251px;">🌸</div><div class="flower-matrix" style="left: 14.3924vw; animation-duration: 4.06763s; opacity: 0.500713; font-size: 17.2816px;">🌻</div><div class="flower-matrix" style="left: 74.804vw; animation-duration: 3.55954s; opacity: 0.474361; font-size: 12.189px;">🏵️</div><div class="flower-matrix" style="left: 20.0122vw; animation-duration: 4.77359s; opacity: 0.531141; font-size: 14.5884px;">🏵️</div><div class="flower-matrix" style="left: 27.9931vw; animation-duration: 2.63376s; opacity: 0.544968; font-size: 10.2581px;">🌻</div><div class="flower-matrix" style="left: 9.5304vw; animation-duration: 3.37641s; opacity: 0.341571; font-size: 10.9578px;">💮</div><div class="flower-matrix" style="left: 42.8587vw; animation-duration: 3.77906s; opacity: 0.759681; font-size: 14.6335px;">🌻</div><div class="flower-matrix" style="left: 49.0291vw; animation-duration: 4.81942s; opacity: 0.35919; font-size: 10.206px;">🏵️</div><div class="flower-matrix" style="left: 87.1011vw; animation-duration: 2.71544s; opacity: 0.554556; font-size: 14.3425px;">💐</div><div class="flower-matrix" style="left: 60.0978vw; animation-duration: 2.68698s; opacity: 0.54344; font-size: 11.6155px;">🌸</div><div class="flower-matrix" style="left: 36.2941vw; animation-duration: 3.13664s; opacity: 0.765354; font-size: 18.3282px;">🌸</div><div class="flower-matrix" style="left: 65.5424vw; animation-duration: 3.84798s; opacity: 0.385989; font-size: 15.2334px;">💮</div><div class="flower-matrix" style="left: 80.2671vw; animation-duration: 2.27679s; opacity: 0.516535; font-size: 15.4952px;">🏵️</div><div class="flower-matrix" style="left: 98.5398vw; animation-duration: 4.99803s; opacity: 0.370954; font-size: 11.8548px;">🌻</div><div class="flower-matrix" style="left: 8.7712vw; animation-duration: 3.24211s; opacity: 0.791361; font-size: 15.1958px;">🌸</div><div class="flower-matrix" style="left: 40.3306vw; animation-duration: 4.81727s; opacity: 0.696574; font-size: 17.9007px;">🌻</div><div class="flower-matrix" style="left: 95.2313vw; animation-duration: 3.71222s; opacity: 0.485285; font-size: 15.0265px;">🏵️</div><div class="flower-matrix" style="left: 8.24681vw; animation-duration: 2.5091s; opacity: 0.391438; font-size: 22.95px;">💮</div><div class="flower-matrix" style="left: 25.7998vw; animation-duration: 2.54411s; opacity: 0.554179; font-size: 24.5744px;">🏵️</div><div class="flower-matrix" style="left: 68.2976vw; animation-duration: 4.34653s; opacity: 0.772886; font-size: 11.5751px;">💐</div><div class="flower-matrix" style="left: 48.3218vw; animation-duration: 4.40559s; opacity: 0.591232; font-size: 10.402px;">🌸</div><div class="flower-matrix" style="left: 67.8946vw; animation-duration: 3.06383s; opacity: 0.66891; font-size: 17.6922px;">🏵️</div><div class="flower-matrix" style="left: 52.498vw; animation-duration: 4.93824s; opacity: 0.470394; font-size: 10.2267px;">🏵️</div><div class="flower-matrix" style="left: 86.7447vw; animation-duration: 3.42208s; opacity: 0.718083; font-size: 19.0672px;">🌼</div><div class="flower-matrix" style="left: 25.9739vw; animation-duration: 3.0654s; opacity: 0.525176; font-size: 12.149px;">🏵️</div></div>
+    
+    <div class="card">
+        <div class="header">
+            <h1>Feliz Día de las<br>Flores Amarillas</h1>
+            <div class="date">21 de Septiembre</div>
+        </div>
+        <button class="music-btn" id="musicBtn">♪</button>
+        <div class="photo-frame">
+            <img src="flores.jpg" alt="Flores Amarillas">
+        </div>
+
+        <p class="message" style="animation-delay: 0.3s;">
+            En este día especial, quiero que sepas...
+        </p>
+
+        <!-- <p class="message" style="animation-delay: 0.6s;">Eres la luz que ilumina mi vida como el amarillo de estas flores.</p> -->
+
+        <button class="flower-btn" id="flowerBtn">🌼 Abre Mi Corazón</button>
+
+        <div class="signature">Para Ti  con Amor.</div>
+    </div>
+
+    <div class="modal" id="letterModal">
+        <span class="close-btn" id="closeBtn">×</span>
+        <div class="modal-content">
+            
+            <div class="torn-paper">
+                <h1 class="letter-title">Para Mi Amor</h1>
+                
+                <div class="letter-content">
+                     <p>Querida <strong>Sary</strong>,</p>
+                    <p>Hoy, en este Día de las Flores Amarillas, quiero regalarte no solo un ramo, 
+                    sino también mis palabras más sinceras.</p>
+                    <p>
+                    Tú eres la luz que ilumina mis mañanas y la calma que acaricia mis noches. 
+                    Tu sonrisa tiene el poder de transformar cualquier momento en felicidad, 
+                    y tu mirada es el refugio donde siempre quiero quedarme.
+                </p>
+
+                <p>
+                    Cada instante contigo es como caminar en un campo infinito de flores amarillas: 
+                    lleno de vida, esperanza y amor. Tu risa es la melodía que alegra mi alma, 
+                    y tu cariño el regalo más hermoso que la vida me dio.
+                </p>
+
+                <p>
+                    Gracias por existir, por elegirme y por ser tan única.  
+                    Eres mi inspiración, mi fortaleza y el sueño más lindo que se volvió realidad.
+                </p>
+
+                <p>
+                    Con todo mi amor,<br>
+                     Isaac 💛
+                </p>
+            </div>
+                
+                <div class="letter-signature">Con todo mi Amor.</div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/htmlpreview" src="js/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const matrixFlowers = document.getElementById('matrixFlowers');
+    const flowerSymbols = ['🌼', '🌻', '💐', '🌸', '💮', '🏵️'];
+    
+    function createMatrixFlowers() {
+        const flower = document.createElement('div');
+        flower.className = 'flower-matrix';
+        flower.innerHTML = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = 2 + Math.random() * 3 + 's';
+        flower.style.opacity = Math.random() * 0.5 + 0.3;
+        flower.style.fontSize = (10 + Math.random() * 15) + 'px';
+        matrixFlowers.appendChild(flower);
+        
+        setTimeout(() => {
+            flower.remove();
+        }, 5000);
+    }
+    
+    setInterval(createMatrixFlowers, 100);
+    const flowerBtn = document.getElementById('flowerBtn');
+    const letterModal = document.getElementById('letterModal');
+    const closeBtn = document.getElementById('closeBtn');
+    
+    flowerBtn.addEventListener('click', function() {
+        letterModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                createFlowerExplosion();
+            }, i * 50);
+        }
+    });
+    
+    closeBtn.addEventListener('click', function() {
+        letterModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    window.addEventListener('click', function(event) {
+        if (event.target === letterModal) {
+            letterModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    const audio = new Audio('https://bcodestorague.anteroteobaldob.workers.dev/share/anteroteobaldob_gmail_com/AUDIO/Flores%20amarillas.mp3');
+    let isPlaying = false;
+
+    function toggleAudio() {
+    if (isPlaying) {
+        audio.pause();
+        musicBtn.textContent = '♪';
+        flowerBtn.textContent = '🌼';
+    } else {
+        audio.play().catch(e => console.log("La reproducción automática fue prevenida. Haz clic manualmente."));
+        musicBtn.textContent = '❚❚';
+        flowerBtn.textContent = '❚❚';
+    }
+    isPlaying = !isPlaying;
+    }
+
+    const musicBtn = document.getElementById('musicBtn');
+    musicBtn.addEventListener('click', toggleAudio);
+    flowerBtn.addEventListener('click', toggleAudio);
+
+    window.addEventListener('mousemove', function autoPlayOnce() {
+    if (!isPlaying) {
+        audio.play().then(() => {
+        musicBtn.textContent = '❚❚';
+        flowerBtn.textContent = '❚❚';
+        isPlaying = true;
+        }).catch(e => console.log("Autoplay bloqueado por el navegador."));
+    }
+    window.removeEventListener('mousemove', autoPlayOnce);
+    });
+
+    function createFlowerExplosion() {
+        const explosion = document.createElement('div');
+        explosion.innerHTML = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+        explosion.style.position = 'fixed';
+        explosion.style.left = Math.random() * 100 + 'vw';
+        explosion.style.top = Math.random() * 100 + 'vh';
+        explosion.style.color = `hsl(${Math.random() * 20 + 50}, 100%, 50%)`;
+        explosion.style.fontSize = '25px';
+        explosion.style.zIndex = '100';
+        explosion.style.transform = 'scale(0)';
+        explosion.style.animation = `pop 0.5s forwards, fadeOut 0.5s 0.5s forwards`;
+        
+        document.body.appendChild(explosion);
+        
+        setTimeout(() => {
+            explosion.remove();
+        }, 1000);
+    }
+    
+    document.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+    }, { passive: false });
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pop {
+            to { transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: scale(0.5); }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script></body></html>
